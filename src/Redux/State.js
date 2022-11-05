@@ -1,6 +1,5 @@
-import {rerenderEntireTree} from '../render';
-
-  let state = {
+let store = {
+  _state: {
     profilePage: {
       posts:[
         {id:1, message: 'Hi, how are you?', likesCount: 12},
@@ -29,26 +28,40 @@ import {rerenderEntireTree} from '../render';
       ]
     },
     sideBar: {}
-  }
+  },
+  
+getState() {
+  return this._state;
+},
 
+  _callSubscriber () {
+    console.log('State changed');
+  },
 
-  export let addPost = () => {
+  addPost () {
   
     let newPost = {
     id: 5,
-    message: state.profilePage.newPostText,
+    message: this._state.profilePage.newPostText,
     likesCount: 0
     };
     
-    state.profilePage.posts.push(newPost);
-    state.profilePage.newPostText = '';
-    rerenderEntireTree(state);
-  }
+    this._state.profilePage.posts.push(newPost);
+    this._state.profilePage.newPostText = '';
+    this._callSubscriber(this._state);
+  },
 
-  export let updateNewPostText = (newText) => {
+  updateNewPostText (newText) {
   
-    state.profilePage.newPostText=newText;
-    rerenderEntireTree(state);
-  }
+    this._state.profilePage.newPostText = newText;
+    this._callSubscriber(this._state);
+  },
+  
+  subscribe (observer) {
+    this._callSubscriber = observer;
+  },
+}
 
-  export default state;
+export default store;
+
+window.store = store;
