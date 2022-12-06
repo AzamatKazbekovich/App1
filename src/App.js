@@ -1,7 +1,7 @@
 import './App.css';
 import Header from './components/Header/Header'
 import Navbar from './components/Navbar/Navbar'
-import Profile from './components/Profile/Profile'
+import ProfileContainer from './components/Profile/ProfileContainer'
 import DialogsContainer from './components/Dialogs/DialogsContainer'
 import { Route, Routes } from "react-router-dom"
 import UsersContainer from './components/Users/UsersConteiner'
@@ -9,7 +9,7 @@ import UsersContainer from './components/Users/UsersConteiner'
 
 
 const App = (props) => {
-  debugger;
+
   return (
 
     <div className="app-wrapper">
@@ -20,7 +20,7 @@ const App = (props) => {
           <Route path="/dialogs"
             element={<DialogsContainer />} />
           <Route path="/profile"
-            element={<Profile />} />
+            element={<ProfileContainer />} />
           <Route path="/users"
             element={<UsersContainer />} />
         </Routes>
